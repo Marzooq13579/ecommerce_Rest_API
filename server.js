@@ -4,12 +4,18 @@ import 'dotenv/config';
 import mongoose from './config/database.js'; // Import database connection with event listeners
 import route from './routes/Auth.js';
 import productrouter from './routes/Product.js';
+import cartRouter from './routes/cart.js'; 
+
+
 const app = express();
 
 // CORS middleware
 app.use(cors());
 
 // Your routes and other app configuration (e.g., user routes, product routes)
+
+
+app.use('/cart',cartRouter)
 
 
 
