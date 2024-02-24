@@ -9,6 +9,7 @@ const productSchema = new mongoose.Schema({
   category: { type: mongoose.Schema.Types.ObjectId, ref: 'Category' },
   stock: { type: Number },
   brand: { type: String },
+  seller:{type: mongoose.Schema.Types.ObjectId,ref:'User'}
 });
 
 const Product = mongoose.model('Product', productSchema);
