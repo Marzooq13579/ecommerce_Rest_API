@@ -36,7 +36,7 @@ router.post("/register", async (req, res, next) => {
     if (savedUser) {
       // Generate JWT token
       const token = jwt.sign(
-        { userId: savedUser._id },
+        { userId: savedUser._id, isAdmin: savedUser.isAdmin },
         process.env.JWT_SECRET,
         {
           expiresIn: "1h", // Customize token expiration time
@@ -89,9 +89,13 @@ router.post("/login", async (req, res, next) => {
 
     if (isMatch) {
       // Generate JWT token
-      const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
-        expiresIn: "1h", // Customize token expiration time
-      });
+      const token = jwt.sign(
+        { userId: user._id, isAdmin: user.isAdmin },
+        process.env.JWT_SECRET,
+        {
+          expiresIn: "1h", // Customize token expiration time
+        }
+      );
 
       const sanitizedUser = {
         name: user.name,
@@ -121,12 +125,12 @@ router.post("/login", async (req, res, next) => {
 //User Info Update Route
 
 router.put("/updateUserInfo", Verify, async (req, res, next) => {
-    console.log("inside update user info api")
+  console.log("inside update user info api");
   try {
     const { userId } = req.user; // Access user ID from decoded token
     const { username, email, phone, street, city } = req.body;
 
-    console.log("req body is",req.body)
+    console.log("req body is", req.body);
 
     // Find user by ID
     const user = await User.findById(userId);
@@ -158,13 +162,11 @@ router.put("/updateUserInfo", Verify, async (req, res, next) => {
       phoneNumber: user.phoneNumber,
     };
 
-    res
-      .status(200)
-      .json({
-        status: true,
-        message: "User info updated successfully",
-        data: sanitizedUser,
-      });
+    res.status(200).json({
+      status: true,
+      message: "User info updated successfully",
+      data: sanitizedUser,
+    });
   } catch (err) {
     next(err);
   }
@@ -185,5 +187,3 @@ router.get("/logout", async (req, res, next) => {
 });
 
 export default router;
-
-

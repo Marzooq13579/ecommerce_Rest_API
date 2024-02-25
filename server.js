@@ -5,6 +5,8 @@ import mongoose from "./config/database.js"; // Import database connection with 
 import authRouter from "./routes/Auth.js";
 import productRouter from "./routes/Product.js";
 import cartRouter from "./routes/cart.js";
+import orderRouter from "./routes/Order.js";
+import seedAdmin from "./utils/adminSeeder.js";
 
 const app = express();
 
@@ -16,11 +18,13 @@ app.use(json());
 // Your routes and other app configuration (e.g., user routes, product routes)
 
 app.use("/api/auth", authRouter);
-app.use("/api/product/create", productRouter);
+app.use("/api/product/", productRouter);
 app.use("/cart", cartRouter);
+app.use("/orders", orderRouter);
 
 // Server startup **after successfully connecting to the database**
 mongoose.connection.once("open", () => {
+  seedAdmin();
   const port = process.env.PORT || 5010;
   app.listen(port, () => console.log(`Server listening on port ${port}`));
 });
@@ -35,7 +39,7 @@ mongoose.connection.on("error", (err) => {
 app.use((err, req, res, next) => {
   // Handle errors here, send appropriate response or log
   console.error("Server error:", err);
-  let message = "Something went wrong"
-  if(err.message)  message = err.message;
-  res.status(500).json({ error: message  });
+  let message = "Something went wrong";
+  if (err.message) message = err.message;
+  res.status(500).json({ error: message });
 });
