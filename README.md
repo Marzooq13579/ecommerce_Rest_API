@@ -1,4 +1,4 @@
-# E-commerce REST API with Express.js, MongoDB, Mongoose, and Stripe
+# E-commerce REST API with Express.js, MongoDB, Mongoose
 
 **A robust and customizable e-commerce REST API built for flexibility and growth.**
 
@@ -6,7 +6,7 @@
 - **Comprehensive Product Management:** CRUD operations for products with images, categories, and stock tracking.
 - **Secure User Authentication:** JWT-based authentication ensures secure and authorized access.
 - **Flexible Cart System:** Add, remove, and update items in user carts for efficient checkout.
-- **Powerful Order Processing:** Create orders, manage fulfillment, and track payment statuses with Stripe integration.
+- **Powerful Order Processing:** Create orders and manage fulfillment of them.
 - **Optional Address Management:** Store both shipping and billing addresses for users.
 - **Customizable Schemas:** Easily adapt the provided schemas to your project needs.
 
@@ -14,7 +14,6 @@
 - **Express.js** (backend framework)
 - **MongoDB** (database)
 - **Mongoose** (ODM for MongoDB)
-- **Stripe** (payment gateway)
 - **JWT** (JSON Web Tokens)
 
 ## Benefits
