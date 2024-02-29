@@ -12,15 +12,14 @@ const orderSchema = new mongoose.Schema({
   ],
   shippingAddress: {
     name: { type: String },
-    street1: { type: String },
-    street2: { type: String },
+    street: { type: String },
     city: { type: String },
     state: { type: String },
     postalCode: { type: String },
     country: { type: String },
   },
   paymentDetails: {
-    cardNumber: { type: String, required: true },
+    cardNumber: { type: String },
    
   },
   orderStatus: { type: String },
